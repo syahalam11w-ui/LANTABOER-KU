@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Daftar PPDB - MTs Lantaboer 2026/2027</title>
-  <meta name="description" content="Formulir Pendaftaran Peserta Didik Baru MTs Lantaboer Jakarta Timur. Daftar sekarang secara online.">
+  <title>Formulir Pendaftaran - PPDB MTs Lantaboer</title>
+  <meta name="description" content="Formulir Pendaftaran Peserta Didik Baru MTs Lantaboer. Isi data dengan lengkap untuk melanjutkan proses seleksi.">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   
   <!-- Favicon -->
-  <link rel="icon" href="image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
   
   <style>
     /* ========== CSS VARIABLES (SAME AS HOME) ========== */
@@ -41,7 +41,7 @@
       font-family: 'Inter', system-ui, sans-serif;
       background: var(--bg-body); color: var(--text-primary);
       line-height: 1.6; -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column;
     }
     
     /* ========== ANIMATIONS ========== */
@@ -52,11 +52,10 @@
     @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
     
     .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
-    .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
-    .animate-slide-in-right { animation: slideInRight 0.5s ease-out forwards; }
-    .animate-pulse { animation: pulse 2s infinite; }
+    .animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; opacity: 0; }
+    .animate-slide-in-right { animation: slideInRight 0.5s ease-out forwards; opacity: 0; }
     
-    /* ========== NAVIGATION (SAME AS HOME) ========== */
+    /* ========== NAVIGATION ========== */
     .menu-toggle {
       position: fixed; top: 20px; left: 20px; width: 56px; height: 56px;
       background: var(--bg-gradient); border-radius: var(--radius);
@@ -68,7 +67,7 @@
     .menu-toggle svg { width: 26px; height: 26px; fill: white; }
     
     .sidebar {
-      position: fixed; top: 0; left: -380px; width: 380px; max-width: 90vw;
+      position: fixed; top: 0; left: -400px; width: 400px; max-width: 90vw;
       height: 100vh; background: var(--bg-gradient-dark); color: white;
       padding: 100px 28px 32px; transition: left var(--transition);
       z-index: var(--z-modal); box-shadow: 8px 0 40px rgba(0,0,0,0.25);
@@ -96,8 +95,8 @@
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.5); backdrop-filter: blur(6px);
       opacity: 0; visibility: hidden; transition: all var(--transition);
-      z-index: calc(var(--z-modal) - 1);    }
-    .overlay.active { opacity: 1; visibility: visible; }
+      z-index: calc(var(--z-modal) - 1);
+    }    .overlay.active { opacity: 1; visibility: visible; }
     
     /* ========== HEADER ========== */
     header {
@@ -125,7 +124,9 @@
     }
     
     /* ========== FORM CONTAINER ========== */
-    .container { max-width: 800px; margin: 0 auto; padding: 50px 24px; }
+    .container {
+      max-width: 900px; margin: 0 auto; padding: 50px 24px; flex: 1; width: 100%;
+    }
     
     .form-card {
       background: var(--bg-card); border-radius: var(--radius-xl);
@@ -134,7 +135,7 @@
       overflow: hidden; animation: fadeInUp 0.6s ease-out;
     }
     
-    .form-header { text-align: center; margin-bottom: 36px; }
+    .form-header { text-align: center; margin-bottom: 40px; }
     .form-title {
       color: var(--primary-dark); font-size: 1.8rem; font-weight: 800;
       margin-bottom: 12px; letter-spacing: -0.5px;
@@ -144,13 +145,24 @@
     .info-box {
       background: linear-gradient(135deg, #dbeafe, #bfdbfe);
       border-left: 5px solid var(--primary);
-      padding: 20px 24px; border-radius: var(--radius);
-      margin-bottom: 32px; font-size: 0.95rem; color: var(--primary-darker);      display: flex; gap: 12px; align-items: flex-start;
+      padding: 20px 24px; border-radius: var(--radius);      margin-bottom: 32px; font-size: 0.95rem; color: var(--primary-darker);
+      display: flex; gap: 12px; align-items: flex-start;
     }
     .info-box svg { width: 24px; height: 24px; fill: var(--primary); flex-shrink: 0; }
     
+    /* Form Sections */
+    .form-section { margin-bottom: 32px; }
+    .section-title {
+      font-size: 1.2rem; font-weight: 700; color: var(--primary-dark);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+      padding-bottom: 10px; border-bottom: 2px solid var(--border-light);
+    }
+    .section-title svg { width: 22px; height: 22px; fill: var(--primary); }
+    
     /* Form Grid */
-    .form-grid { display: grid; gap: 24px; margin-bottom: 32px; }
+    .form-grid { display: grid; gap: 24px; }
+    .form-grid-2 { grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .form-grid-2 { grid-template-columns: 1fr 1fr; } }
     
     .form-group { display: grid; gap: 8px; position: relative; }
     .form-group label {
@@ -166,36 +178,53 @@
       transition: fill var(--transition); pointer-events: none;
     }
     
-    .form-group input, .form-group textarea {
-      width: 100%; padding: 16px 16px 16px 48px;
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 14px 16px 14px 48px;
       border: 2px solid var(--border); border-radius: var(--radius);
       font-size: 1rem; transition: var(--transition);
       font-family: inherit; background: var(--bg-body);
       color: var(--text-primary);
     }
+    .form-group textarea { min-height: 100px; resize: vertical; padding-left: 16px; }
+    .form-group textarea ~ svg { display: none; }
     
-    .form-group textarea { min-height: 120px; resize: vertical; padding-left: 16px; }
-    .form-group textarea ~ svg { display: none; } /* Hide icon for textarea */
-    
-    .form-group input:focus, .form-group textarea:focus {
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
       outline: none; border-color: var(--primary);
       box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
       background: white;
     }
     
-    .form-group input:focus ~ svg, .form-group textarea:focus ~ svg {
-      fill: var(--primary);
-    }
-    
-    .form-group input.error, .form-group textarea.error {
+    .form-group input:focus ~ svg, .form-group select:focus ~ svg { fill: var(--primary); }    
+    .form-group input.error, .form-group select.error {
       border-color: var(--danger);
       animation: shake 0.4s ease-in-out;
     }
     
     .error-message {
       color: var(--danger); font-size: 0.85rem; font-weight: 500;
-      margin-top: 4px; display: none;    }
+      margin-top: 4px; display: none;
+    }
     .form-group.invalid .error-message { display: block; }
+    
+    /* Checkbox Group */
+    .checkbox-group {
+      display: grid; gap: 12px; margin-top: 10px;
+    }
+    .checkbox-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px; border: 1px solid var(--border);
+      border-radius: var(--radius); cursor: pointer;
+      transition: var(--transition); background: var(--bg-body);
+    }
+    .checkbox-item:hover { border-color: var(--primary-light); background: #eff6ff; }
+    .checkbox-item input {
+      width: 20px; height: 20px; margin-top: 2px; accent-color: var(--primary);
+      cursor: pointer; flex-shrink: 0;
+    }
+    .checkbox-item label {
+      cursor: pointer; font-weight: 500; color: var(--text-secondary);
+      margin: 0; line-height: 1.4;
+    }
     
     /* Submit Button */
     .submit-btn {
@@ -214,8 +243,7 @@
       box-shadow: 0 15px 40px rgba(34, 197, 94, 0.55);
     }
     
-    .submit-btn:disabled {
-      opacity: 0.7; cursor: not-allowed; transform: none;
+    .submit-btn:disabled {      opacity: 0.7; cursor: not-allowed; transform: none;
     }
     
     .submit-btn svg { width: 24px; height: 24px; fill: white; }
@@ -240,10 +268,68 @@
     }
     .form-note svg { width: 20px; height: 20px; fill: #d97706; flex-shrink: 0; }
     
+    /* ========== MODAL CONFIRMATION ========== */
+    .modal {
+      position: fixed; inset: 0; z-index: var(--z-modal);
+      display: flex; justify-content: center; align-items: center;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+      opacity: 0; visibility: hidden; transition: all 0.3s ease;
+      padding: 20px;
+    }
+    .modal.active { opacity: 1; visibility: visible; }
+    
+    .modal-content {
+      background: white; border-radius: var(--radius-xl);
+      width: 100%; max-width: 500px;
+      box-shadow: var(--shadow-xl);
+      transform: scale(0.95); transition: transform 0.3s ease;
+      overflow: hidden;
+    }
+    .modal.active .modal-content { transform: scale(1); }
+    
+    .modal-header {
+      background: var(--bg-gradient); color: white;
+      padding: 24px; text-align: center;
+    }
+    .modal-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+    .modal-subtitle { font-size: 0.95rem; opacity: 0.9; }    
+    .modal-body { padding: 24px; }
+    .data-preview {
+      background: var(--bg-body); border-radius: var(--radius);
+      padding: 16px; font-size: 0.9rem; color: var(--text-secondary);
+      max-height: 300px; overflow-y: auto; border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .data-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px dashed var(--border);
+    }
+    .data-row:last-child { border-bottom: none; }
+    .data-label { font-weight: 600; color: var(--text-primary); }
+    
+    .modal-footer {
+      padding: 20px 24px; background: var(--bg-body);
+      display: flex; gap: 12px; justify-content: flex-end;
+    }
+    
+    .btn-modal {
+      padding: 12px 24px; border-radius: var(--radius);
+      font-weight: 600; cursor: pointer; border: none;
+      transition: var(--transition); font-size: 0.95rem;
+    }
+    .btn-cancel { background: white; border: 1px solid var(--border); color: var(--text-secondary); }
+    .btn-cancel:hover { background: var(--bg-body); }
+    .btn-confirm {
+      background: #25D366; color: white;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .btn-confirm:hover { background: #128C7E; transform: translateY(-2px); }
+    
     /* ========== FOOTER ========== */
     footer {
       background: var(--bg-gradient-dark); color: white;
-      text-align: center; padding: 40px 24px 30px; margin-top: 60px;    }
+      text-align: center; padding: 40px 24px 30px; margin-top: auto;
+    }
     .footer-logo {
       width: 72px; height: 72px; border-radius: var(--radius-lg);
       border: 3px solid rgba(255,255,255,0.95); margin: 0 auto 18px;
@@ -253,10 +339,9 @@
     .footer-text strong { font-weight: 700; display: block; margin-bottom: 6px; }
     .copyright { margin-top: 20px; font-size: 0.95rem; opacity: 0.88; }
     
-    /* ========== TOAST NOTIFICATION ========== */
+    /* ========== TOAST ========== */
     .toast-container {
-      position: fixed; top: 20px; right: 20px; z-index: var(--z-toast);
-      display: flex; flex-direction: column; gap: 10px;
+      position: fixed; top: 20px; right: 20px; z-index: var(--z-toast);      display: flex; flex-direction: column; gap: 10px;
     }
     .toast {
       background: white; padding: 16px 20px; border-radius: var(--radius);
@@ -276,9 +361,10 @@
       .header-title { font-size: 1.8rem; }
       .header-subtitle { font-size: 1.05rem; }
       .toast { min-width: auto; width: calc(100vw - 40px); }
+      .modal-footer { flex-direction: column-reverse; }
+      .btn-modal { width: 100%; justify-content: center; }
     }
     
-    /* ========== UTILITIES ========== */
     ::selection { background: var(--primary-lighter); color: white; }
     img { max-width: 100%; height: auto; display: block; }
   </style>
@@ -292,7 +378,8 @@
   <!-- Sidebar -->
   <nav class="sidebar" id="sidebar">
     <div class="sidebar-header">
-      <img src="https://image2url.com/r2/default/images/1772641298988-6972016f-93d3-4f00-8535-b8c2ac728fb1.jpg" class="sidebar-logo" onerror="this.src='https://via.placeholder.com/88/3b82f6/ffffff?text=MTs'">      <div class="sidebar-title">MTs LANTABOER</div>
+      <img src="https://image2url.com/r2/default/images/1772641298988-6972016f-93d3-4f00-8535-b8c2ac728fb1.jpg" class="sidebar-logo" onerror="this.src='https://via.placeholder.com/88/3b82f6/ffffff?text=MTs'">
+      <div class="sidebar-title">MTs LANTABOER</div>
       <div class="sidebar-subtitle">PPDB 2026/2027</div>
     </div>
     <ul class="nav-links">
@@ -303,8 +390,7 @@
       <li><a href="admin.html"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>Admin</a></li>
     </ul>
   </nav>
-  <div class="overlay" id="overlay"></div>
-  
+  <div class="overlay" id="overlay"></div>  
   <!-- Header -->
   <header>
     <img src="https://image2url.com/r2/default/images/1772641298988-6972016f-93d3-4f00-8535-b8c2ac728fb1.jpg" class="header-logo" onerror="this.src='https://via.placeholder.com/120/3b82f6/ffffff?text=MTs'">
@@ -320,83 +406,139 @@
     <div class="form-card">
       <div class="form-header">
         <h2 class="form-title">📋 Data Calon Peserta Didik</h2>
-        <p class="form-desc">Silakan isi formulir di bawah ini secara lengkap</p>
+        <p class="form-desc">Silakan isi formulir di bawah ini secara lengkap dan jujur</p>
       </div>
       
       <div class="info-box animate-fade-in-up">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
         <div>
           <strong>Informasi Penting:</strong><br>
-          Data yang Anda kirimkan akan tersimpan di database kami dan otomatis terkirim ke WhatsApp Admin untuk verifikasi cepat.
+          Data yang Anda kirimkan akan otomatis terkirim ke WhatsApp Admin untuk verifikasi cepat. Pastikan nomor WhatsApp aktif.
         </div>
       </div>
       
       <form id="registrationForm" novalidate>
-        <div class="form-grid">
-          <!-- Nama Orang Tua -->
-          <div class="form-group animate-fade-in-up">
-            <label for="parentName">
-              👨‍👩‍👧 Nama Lengkap Orang Tua/Wali <span class="required">*</span>
-            </label>
-            <div class="input-wrapper">
-              <input type="text" id="parentName" name="parentName" placeholder="Contoh: Ahmad Fauzi, S.Pd" required autocomplete="name">
-              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-            </div>            <div class="error-message">Nama orang tua wajib diisi</div>
-          </div>
-          
-          <!-- Nama Siswa -->
-          <div class="form-group animate-fade-in-up">
-            <label for="studentName">
-              🎓 Nama Lengkap Calon Siswa <span class="required">*</span>
-            </label>
-            <div class="input-wrapper">
-              <input type="text" id="studentName" name="studentName" placeholder="Contoh: Muhammad Rizki Pratama" required autocomplete="name">
-              <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        
+        <!-- Section 1: Data Siswa -->
+        <div class="form-section animate-fade-in-up">
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            1. Data Calon Siswa
+          </h3>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="studentName">Nama Lengkap <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <input type="text" id="studentName" placeholder="Sesuai Ijazah SD/MI" required>
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              </div>
+              <div class="error-message">Nama wajib diisi</div>
             </div>
-            <div class="error-message">Nama siswa wajib diisi</div>
-          </div>
-          
-          <!-- Asal Sekolah -->
-          <div class="form-group animate-fade-in-up">
-            <label for="schoolOrigin">
-              🏫 Asal Sekolah (SD/MI) <span class="required">*</span>
-            </label>
-            <div class="input-wrapper">
-              <input type="text" id="schoolOrigin" name="schoolOrigin" placeholder="Contoh: SDN Penggilingan 01 Pagi" required>
-              <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+            
+            <div class="form-group">
+              <label for="nisn">NISN <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <input type="text" id="nisn" placeholder="10 Digit Angka" maxlength="10" required inputmode="numeric">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>              </div>
+              <div class="error-message">NISN harus 10 digit angka</div>
             </div>
-            <div class="error-message">Asal sekolah wajib diisi</div>
-          </div>
-          
-          <!-- NISN -->
-          <div class="form-group animate-fade-in-up">
-            <label for="nisn">
-              🔢 NISN (10 Digit Angka) <span class="required">*</span>
-            </label>
-            <div class="input-wrapper">
-              <input type="text" id="nisn" name="nisn" placeholder="0012345678" maxlength="10" pattern="[0-9]{10}" required inputmode="numeric">
-              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            
+            <div class="form-group">
+              <label for="schoolOrigin">Asal Sekolah <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <input type="text" id="schoolOrigin" placeholder="Nama SD/MI" required>
+                <svg viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+              </div>
+              <div class="error-message">Asal sekolah wajib diisi</div>
             </div>
-            <div class="error-message">NISN harus 10 digit angka</div>
-          </div>
-          
-          <!-- No WhatsApp -->
-          <div class="form-group animate-fade-in-up">
-            <label for="phone">
-              📱 Nomor WhatsApp Orang Tua (Opsional)
-            </label>
-            <div class="input-wrapper">
-              <input type="tel" id="phone" name="phone" placeholder="081234567890" maxlength="13" inputmode="numeric">
-              <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.49-5.15-3.8-6.62-6.63l1.97-1.57c.26-.26.36-.62.25-.97-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3.3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .78-.63.78-1.19v-3.44c0-.54-.45-.99-.99-.99z"/></svg>
+            
+            <div class="form-group">
+              <label for="birthDate">Tanggal Lahir <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <input type="date" id="birthDate" required>
+                <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+              </div>
+              <div class="error-message">Tanggal lahir wajib diisi</div>
             </div>
-            <div class="error-message">Format nomor tidak valid</div>
-          </div>          
-          <!-- Alamat -->
-          <div class="form-group animate-fade-in-up">
-            <label for="address">
-              🏠 Alamat Lengkap (Opsional)
-            </label>
-            <textarea id="address" name="address" placeholder="Contoh: Jl. Marzuki IV No. 12, RT 01/RW 02, Penggilingan..."></textarea>
+            
+            <div class="form-group">
+              <label for="gender">Jenis Kelamin <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <select id="gender" required>
+                  <option value="">Pilih...</option>
+                  <option value="Laki-laki">Laki-laki</option>
+                  <option value="Perempuan">Perempuan</option>
+                </select>
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+              </div>
+              <div class="error-message">Jenis kelamin wajib dipilih</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Section 2: Data Orang Tua -->
+        <div class="form-section animate-fade-in-up">
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            2. Data Orang Tua / Wali
+          </h3>
+          <div class="form-grid form-grid-2">
+            <div class="form-group">
+              <label for="parentName">Nama Lengkap Orang Tua <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <input type="text" id="parentName" placeholder="Nama Ayah/Ibu" required>
+                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+              </div>              <div class="error-message">Nama orang tua wajib diisi</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Nomor WhatsApp <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <input type="tel" id="phone" placeholder="081234567890" maxlength="13" required inputmode="numeric">
+                <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.49-5.15-3.8-6.62-6.63l1.97-1.57c.26-.26.36-.62.25-.97-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3.3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .78-.63.78-1.19v-3.44c0-.54-.45-.99-.99-.99z"/></svg>
+              </div>
+              <div class="error-message">Nomor WA wajib diisi (angka saja)</div>
+            </div>
+            
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label for="address">Alamat Lengkap <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <textarea id="address" placeholder="Nama Jalan, RT/RW, Kelurahan, Kecamatan" required></textarea>
+              </div>
+              <div class="error-message">Alamat wajib diisi</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Section 3: Konfirmasi Dokumen -->
+        <div class="form-section animate-fade-in-up">
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            3. Konfirmasi Berkas
+          </h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 10px;">
+            Centang berkas yang sudah Anda siapkan (Fisik akan dibawa saat daftar ulang):
+          </p>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="doc1" checked disabled>
+              <label for="doc1">Formulir Pendaftaran (Terisi)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="doc2">
+              <label for="doc2">Pas Foto 3x4 & 2x3 (2 lembar masing-masing)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="doc3">
+              <label for="doc3">Fotocopy SKL / Surat Keterangan Lulus (2 lembar)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="doc4">
+              <label for="doc4">Fotocopy Kartu Keluarga (2 lembar)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="doc5">              <label for="doc5">Fotocopy Akta Kelahiran (2 lembar)</label>
+            </div>
           </div>
         </div>
         
@@ -404,228 +546,276 @@
           <div class="spinner"></div>
           <span class="btn-text">
             <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 6.554 0 11.89 5.335 11.891 11.891.001 6.557-5.335 11.892-11.891 11.892-2.094.001-4.138-.547-5.941-1.588L.057 24zm11.893-22.061c-5.604 0-10.162 4.558-10.162 10.162 0 1.822.483 3.597 1.398 5.147l-1.437 5.244 5.406-1.402c1.504.866 3.223 1.327 4.795 1.327 5.604 0 10.162-4.558 10.162-10.162 0-5.604-4.558-10.162-10.162-10.162z"/></svg>
-            Kirim Data via WhatsApp
+            Kirim Pendaftaran via WhatsApp
           </span>
         </button>
         
         <div class="form-note">
           <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
           <div>
-            <strong>Catatan:</strong> Pastikan data sudah benar sebelum dikirim. Setelah klik tombol, Anda akan diarahkan ke WhatsApp untuk konfirmasi akhir ke admin.
+            <strong>Catatan:</strong> Setelah klik tombol, Anda akan melihat preview data. Jika sudah benar, klik "Kirim via WhatsApp" untuk menghubungi admin.
           </div>
         </div>
       </form>
     </div>
   </main>
   
+  <!-- Modal Konfirmasi -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Konfirmasi Data</div>
+        <div class="modal-subtitle">Pastikan data sudah benar sebelum dikirim</div>
+      </div>
+      <div class="modal-body">
+        <div class="data-preview" id="dataPreview">
+          <!-- Data will be injected here -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal btn-cancel" id="cancelBtn">Batal Edit</button>
+        <button class="btn-modal btn-confirm" id="confirmBtn">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:white"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 6.554 0 11.89 5.335 11.891 11.891.001 6.557-5.335 11.892-11.891 11.892-2.094.001-4.138-.547-5.941-1.588L.057 24zm11.893-22.061c-5.604 0-10.162 4.558-10.162 10.162 0 1.822.483 3.597 1.398 5.147l-1.437 5.244 5.406-1.402c1.504.866 3.223 1.327 4.795 1.327 5.604 0 10.162-4.558 10.162-10.162 0-5.604-4.558-10.162-10.162-10.162z"/></svg>
+          Kirim via WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+  
   <!-- Footer -->
   <footer>
     <img src="https://image2url.com/r2/default/images/1772641298988-6972016f-93d3-4f00-8535-b8c2ac728fb1.jpg" class="footer-logo" onerror="this.src='https://via.placeholder.com/72/3b82f6/ffffff?text=MTs'">
-    <p class="footer-text">
-      <strong>MTsS LAN TABOER</strong>
-      Jl. Marzuki IV, Penggilingan, Cakung<br>
-      Jakarta Timur, DKI Jakarta
-    </p>
-    <p class="copyright">© 2026 MTs Lantaboer. All Rights Reserved.</p>
-  </footer>
+    <p class="footer-text"><strong>MTsS LAN TABOER</strong><br>Jl. Marzuki IV, Penggilingan, Cakung<br>Jakarta Timur, DKI Jakarta</p>
+    <p class="copyright">© 2026 MTs Lantaboer. All Rights Reserved.</p>  </footer>
   
   <!-- Toast Container -->
   <div class="toast-container" id="toastContainer"></div>
   
-  <!-- Supabase & Logic -->
-  <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/+esm'
-    
+  <!-- Logic -->
+  <script>
     // ========== CONFIGURATION ==========
-    const SUPABASE_URL = 'https://jcimzcyogwxetzhbkhab.supabase.co'
-    const SUPABASE_KEY = 'sb_publishable_9gHJhn7VJcL6ZQAGdDHzkg_99jqkYLk'
-    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)    const WHATSAPP_NUMBER = '628119473407'
+    const WHATSAPP_NUMBER = '628119473407'; // Admin Number
     
     // ========== DOM ELEMENTS ==========
-    const form = document.getElementById('registrationForm')
-    const submitBtn = document.getElementById('submitBtn')
-    const toastContainer = document.getElementById('toastContainer')
-    const menuToggle = document.getElementById('menuToggle')
-    const sidebar = document.getElementById('sidebar')
-    const overlay = document.getElementById('overlay')
+    const form = document.getElementById('registrationForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const modal = document.getElementById('confirmModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const dataPreview = document.getElementById('dataPreview');
+    const toastContainer = document.getElementById('toastContainer');
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
     
     // ========== MENU TOGGLE ==========
     function toggleMenu() {
-      const isActive = sidebar.classList.contains('active')
-      sidebar.classList.toggle('active')
-      overlay.classList.toggle('active')
-      menuToggle.classList.toggle('active')
-      document.body.style.overflow = isActive ? '' : 'hidden'
+      const isActive = sidebar.classList.contains('active');
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+      menuToggle.classList.toggle('active');
+      document.body.style.overflow = isActive ? '' : 'hidden';
     }
-    menuToggle.addEventListener('click', toggleMenu)
-    overlay.addEventListener('click', toggleMenu)
+    menuToggle.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', toggleMenu);
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
-        if (sidebar.classList.contains('active')) toggleMenu()
-      })
-    })
+        if (sidebar.classList.contains('active')) toggleMenu();
+      });
+    });
     
     // ========== TOAST NOTIFICATION ==========
     function showToast(message, type = 'success') {
-      const toast = document.createElement('div')
-      toast.className = `toast toast-${type}`
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
       toast.innerHTML = `
         <span class="toast-icon">${type === 'success' ? '✅' : '❌'}</span>
         <span class="toast-message">${message}</span>
-      `
-      toastContainer.appendChild(toast)
-      
-      // Trigger animation
-      requestAnimationFrame(() => toast.classList.add('show'))
-      
-      // Auto remove
+      `;
+      toastContainer.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.add('show'));
       setTimeout(() => {
-        toast.classList.remove('show')
-        setTimeout(() => toast.remove(), 400)
-      }, 4000)
+        toast.classList.remove('show');        setTimeout(() => toast.remove(), 400);
+      }, 4000);
     }
     
     // ========== INPUT VALIDATION & MASKING ==========
     
     // NISN: Only numbers, max 10
-    const nisnInput = document.getElementById('nisn')    nisnInput.addEventListener('input', function(e) {
-      this.value = this.value.replace(/\D/g, '').slice(0, 10)
-      validateField(this)
-    })
+    const nisnInput = document.getElementById('nisn');
+    nisnInput.addEventListener('input', function(e) {
+      this.value = this.value.replace(/\D/g, '').slice(0, 10);
+      validateField(this);
+    });
     
     // Phone: Only numbers, max 13
-    const phoneInput = document.getElementById('phone')
+    const phoneInput = document.getElementById('phone');
     phoneInput.addEventListener('input', function(e) {
-      this.value = this.value.replace(/\D/g, '').slice(0, 13)
-      // Auto add 62 if starts with 0
-      if (this.value.startsWith('0')) {
-        // Optional: convert to 62 format visually
-      }
-    })
+      this.value = this.value.replace(/\D/g, '').slice(0, 13);
+    });
     
     // Real-time validation on blur
-    form.querySelectorAll('input[required], textarea[required]').forEach(input => {
-      input.addEventListener('blur', () => validateField(input))
+    form.querySelectorAll('input[required], select[required], textarea[required]').forEach(input => {
+      input.addEventListener('blur', () => validateField(input));
       input.addEventListener('input', () => {
         if (input.classList.contains('error')) {
-          input.classList.remove('error')
-          input.parentElement.parentElement.classList.remove('invalid')
+          input.classList.remove('error');
+          input.parentElement.parentElement.classList.remove('invalid');
         }
-      })
-    })
+      });
+    });
     
     function validateField(field) {
-      const value = field.value.trim()
-      const parent = field.parentElement.parentElement
-      let isValid = true
+      const value = field.value.trim();
+      const parent = field.parentElement.parentElement;
+      let isValid = true;
       
       if (field.hasAttribute('required') && !value) {
-        isValid = false
+        isValid = false;
       }
       
       if (field.id === 'nisn' && value && !/^\d{10}$/.test(value)) {
-        isValid = false
+        isValid = false;
+      }
+      
+      if (field.id === 'phone' && value && value.length < 10) {
+        isValid = false;
       }
       
       if (!isValid) {
-        field.classList.add('error')
-        parent.classList.add('invalid')
-      } else {
-        field.classList.remove('error')
-        parent.classList.remove('invalid')
+        field.classList.add('error');
+        parent.classList.add('invalid');      } else {
+        field.classList.remove('error');
+        parent.classList.remove('invalid');
       }
       
-      return isValid
+      return isValid;
     }
-        // ========== FORM SUBMISSION ==========
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault()
+    
+    // ========== FORM SUBMISSION & MODAL ==========
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
       
       // Validate all fields
-      let isFormValid = true
-      form.querySelectorAll('input[required], textarea[required]').forEach(input => {
-        if (!validateField(input)) isFormValid = false
-      })
+      let isFormValid = true;
+      form.querySelectorAll('input[required], select[required], textarea[required]').forEach(input => {
+        if (!validateField(input)) isFormValid = false;
+      });
       
       if (!isFormValid) {
-        showToast('⚠️ Mohon lengkapi semua field yang wajib diisi', 'error')
-        // Scroll to first error
-        const firstError = form.querySelector('.error')
-        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        return
+        showToast('⚠️ Mohon lengkapi semua field yang wajib diisi', 'error');
+        const firstError = form.querySelector('.error');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
       }
       
       // Get values
       const formData = {
-        parent_name: document.getElementById('parentName').value.trim(),
-        student_name: document.getElementById('studentName').value.trim(),
-        school_origin: document.getElementById('schoolOrigin').value.trim(),
-        nisn: document.getElementById('nisn').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        address: document.getElementById('address').value.trim()
-      }
+        studentName: document.getElementById('studentName').value,
+        nisn: document.getElementById('nisn').value,
+        schoolOrigin: document.getElementById('schoolOrigin').value,
+        birthDate: document.getElementById('birthDate').value,
+        gender: document.getElementById('gender').value,
+        parentName: document.getElementById('parentName').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        docs: []
+      };
       
-      // Show loading state
-      submitBtn.classList.add('loading')
-      submitBtn.disabled = true
+      // Check docs
+      if(document.getElementById('doc2').checked) formData.docs.push('Pas Foto');
+      if(document.getElementById('doc3').checked) formData.docs.push('SKL');
+      if(document.getElementById('doc4').checked) formData.docs.push('KK');
+      if(document.getElementById('doc5').checked) formData.docs.push('Akta Kelahiran');
       
-      try {
-        // 1. Save to Supabase
-        const { data, error } = await supabase
-          .from('registrations')
-          .insert([{
-            parent_name: formData.parent_name,
-            student_name: formData.student_name,
-            school_origin: formData.school_origin,
-            nisn: formData.nisn,
-            phone: formData.phone || null,
-            address: formData.address || null,
-            status: 'pending'
-          }])
-          .select()
-          .single()
-        
-        if (error) throw error
-                // 2. Prepare WhatsApp Message
-        const message = `*PPDB MTs LANTABOER 2026/2027*
+      // Show Modal Preview
+      showConfirmationModal(formData);
+    });
+    
+    function showConfirmationModal(data) {
+      const previewHTML = `        <div class="data-row"><span class="data-label">Nama Siswa:</span> <span>${data.studentName}</span></div>
+        <div class="data-row"><span class="data-label">NISN:</span> <span>${data.nisn}</span></div>
+        <div class="data-row"><span class="data-label">Asal Sekolah:</span> <span>${data.schoolOrigin}</span></div>
+        <div class="data-row"><span class="data-label">Tgl Lahir:</span> <span>${data.birthDate}</span></div>
+        <div class="data-row"><span class="data-label">Jenis Kelamin:</span> <span>${data.gender}</span></div>
+        <div class="data-row"><span class="data-label">Nama Orang Tua:</span> <span>${data.parentName}</span></div>
+        <div class="data-row"><span class="data-label">No. WhatsApp:</span> <span>${data.phone}</span></div>
+        <div class="data-row" style="display:block"><span class="data-label">Alamat:</span><br> <span>${data.address}</span></div>
+        <div class="data-row" style="display:block; margin-top:10px; padding-top:10px; border-top:1px solid var(--border)">
+          <span class="data-label">Berkas Siap:</span><br> 
+          <span style="color:var(--success); font-size:0.85rem">✅ ${data.docs.join(', ') || 'Formulir'}</span>
+        </div>
+      `;
+      dataPreview.innerHTML = previewHTML;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    cancelBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', () => {
+      // Only close modal if form is not submitting
+      if(!submitBtn.classList.contains('loading')) closeModal();
+    });
+    
+    // ========== WHATSAPP SEND ==========
+    confirmBtn.addEventListener('click', function() {
+      const studentName = document.getElementById('studentName').value;
+      const nisn = document.getElementById('nisn').value;
+      const schoolOrigin = document.getElementById('schoolOrigin').value;
+      const birthDate = document.getElementById('birthDate').value;
+      const gender = document.getElementById('gender').value;
+      const parentName = document.getElementById('parentName').value;
+      const phone = document.getElementById('phone').value;
+      const address = document.getElementById('address').value;
+      
+      const docs = [];
+      if(document.getElementById('doc2').checked) docs.push('Pas Foto');
+      if(document.getElementById('doc3').checked) docs.push('SKL');
+      if(document.getElementById('doc4').checked) docs.push('KK');
+      if(document.getElementById('doc5').checked) docs.push('Akta Kelahiran');
+      
+      const message = `*PPDB MTs LANTABOER 2026/2027*
 
 📋 *DATA PENDAFTARAN BARU*
+━━━━━━━━━━━━━━━━━━━━━━🎓 *Nama Siswa:* ${studentName}
+🔢 *NISN:* ${nisn}
+🏫 *Asal Sekolah:* ${schoolOrigin}
+📅 *Tgl Lahir:* ${birthDate}
+⚧ *Jenis Kelamin:* ${gender}
 ━━━━━━━━━━━━━━━━━━━━━━
-👨‍👩‍👧 Nama Orang Tua: ${formData.parent_name}
-🎓 Nama Siswa: ${formData.student_name}
-🏫 Asal Sekolah: ${formData.school_origin}
-🔢 NISN: ${formData.nisn}
-${formData.phone ? `📱 WhatsApp: ${formData.phone}\n` : ''}${formData.address ? `🏠 Alamat: ${formData.address}\n` : ''}
+👨‍👩‍👧 *Nama Orang Tua:* ${parentName}
+📱 *WhatsApp:* ${phone}
+🏠 *Alamat:* ${address}
+━━━━━━━━━━━━━━━━━━━━━━
+📂 *Berkas Siap:*
+✅ ${docs.join(', ')}
 ━━━━━━━━━━━━━━━━━━━━━━
 
 Mohon data ini diproses untuk pendaftaran PPDB.
 Saya siap mengikuti tahapan seleksi selanjutnya.
 
-Terima kasih. 🙏`
-        
-        // 3. Open WhatsApp
-        const encodedMessage = encodeURIComponent(message)
-        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`
-        
-        // Small delay to ensure DB save completes visually
-        setTimeout(() => {
-          window.open(whatsappUrl, '_blank')
-          showToast('✅ Data berhasil disimpan! Mengarahkan ke WhatsApp...', 'success', 5000)
-          form.reset()
-          submitBtn.classList.remove('loading')
-          submitBtn.disabled = false
-        }, 800)
-        
-      } catch (error) {
-        console.error('Registration error:', error)
-        showToast('❌ Gagal menyimpan data. Periksa koneksi internet.', 'error')
-        submitBtn.classList.remove('loading')
-        submitBtn.disabled = false
-      }
-    })
+Terima kasih. 🙏`;
+      
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+      
+      // Open WhatsApp
+      window.open(whatsappUrl, '_blank');
+      
+      // Close modal & Show success
+      closeModal();
+      showToast('✅ Data berhasil dikirim! Mengarahkan ke WhatsApp...', 'success', 5000);
+      
+      // Optional: Reset form after delay
+      // setTimeout(() => form.reset(), 2000);
+    });
     
-    // ========== INITIALIZE ==========
-    console.log('✅ Registration form loaded successfully')
+    console.log('✅ Registration form loaded successfully');
   </script>
 </body>
-    </html>
+</html>
